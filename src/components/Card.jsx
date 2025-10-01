@@ -1,6 +1,6 @@
 function Recipe({ recipe }) {
     return (
-        <div>
+        <div className='card'>
             <img
                 className='cardImg'
                 src={recipe.strMealThumb}
