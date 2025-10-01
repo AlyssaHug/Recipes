@@ -1,0 +1,33 @@
+/*====Card Styles====*/
+.card {
+    width: 264px;
+    height: 356px;
+    position: relative;
+    align-items: center;
+    border: 6px solid #ab411b;
+    text-align: center;
+    background-color: #cd8c479c;
+}
+
+.recipe_name {
+    color: #ab411b;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+.view,
+a {
+    text-decoration: none;
+    color: #fce7b6;
+    background-color: #ab411b;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 4px 8px 0;
+    padding: 10px;
+}
+.cardImg {
+    max-width: 220px;
+    margin: 20px;
+}

@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+html,
+body {
+    background: #fce7b6;
+    margin: 0;
+    padding: 0;
+    font-family: "Quicksand", arial;
+}
+main {
+    flex: 1 0 auto; /* Allows main content to grow and not shrink */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.content {
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+.recipes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    padding: 0 2em;
+    justify-content: center;
+}
