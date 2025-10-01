@@ -1,0 +1,43 @@
+/*====Card Styles====*/
+.card {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    align-items: center;
+    border: 4px solid #272932;
+    border-radius: 32px;
+    text-align: center;
+
+    > span {
+        background-color: #272932;
+        color: #90a8c3;
+        padding: 0.2em 0.5em;
+        border: none;
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+}
+
+.recipe_name {
+    color: #272932;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 0;
+}
+.view,
+a {
+    text-decoration: none;
+    color: #90a8c3;
+    background-color: #272932;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 20px;
+    margin: 4px 8px 0;
+    padding: 10px;
+}
+.cardImg {
+    max-width: 200px;
+}
