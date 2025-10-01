@@ -31,3 +31,16 @@ a {
     max-width: 220px;
     margin: 20px;
 }
+
+/*====Button Styles====*/
+.button {
+    width: 264px;
+    height: 356px;
+    font-family: "Quicksand", arial;
+    font-size: 24px;
+    font-weight: 500;
+    color: #da760b;
+    background-color: #ffc5869c;
+    border: 15px solid #da760b;
+    text-align: center;
+}
