@@ -18,36 +18,14 @@
 /*====Header Styles====*/
 header {
     background-color: var(--secondary-color);
-    padding: 3em 4em;
-    justify-content: center;
-    margin-bottom: 5vh;
-    display: flex;
-    flex-wrap: wrap;
-    > .header-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-right: 60px;
-    }
-    .header-content h1 {
-        margin: 0;
-        font-size: 3em;
-        color: white;
-        text-align: center;
-    }
-    span {
-        font-weight: var(--font-weight-bold);
-    }
-    .header-content p {
-        margin: 0;
-        font-size: 1.25em;
-        color: var(--light-color);
-        margin-bottom: 20px;
-    }
-    img {
-        max-width: 400px;
-        border-radius: 10%;
-    }
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+    margin-bottom: 10vh;
+}
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
 }
 
 /*====Card Styles====*/
@@ -104,11 +82,11 @@ a {
 
 /*====Footer Styles====*/
 footer {
-    background-color: var(--primary-color);
+    background-color: #ffb703;
     color: white;
     text-align: center;
-    margin-top: 5vh;
     padding: 1em 0;
+    position: relative;
     bottom: 0;
     width: 100%;
 }

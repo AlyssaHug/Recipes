@@ -104,11 +104,12 @@ a {
 
 /*====Footer Styles====*/
 footer {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: white;
     text-align: center;
-    margin-top: 5vh;
+    margin-top: 30px;
     padding: 1em 0;
+    position: relative;
     bottom: 0;
     width: 100%;
 }
