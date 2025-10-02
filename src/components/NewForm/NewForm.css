@@ -1,0 +1,54 @@
+/*====Form Styles====*/
+.form-container {
+    background-color: var(--light-color);
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 5px auto;
+    max-width: 520px;
+}
+.form-control {
+    margin-bottom: 12px;
+}
+.form-title {
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-large);
+    margin-bottom: 12px auto;
+    text-align: center;
+
+}
+.form-control label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-medium);
+}
+.form-control input {
+    width:90%;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    margin: 5 px;
+}
+.create-button {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-medium);
+    cursor: pointer;
+    margin-top: 12px;
+}
+.create-button:hover {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-medium);
+}
+
+
