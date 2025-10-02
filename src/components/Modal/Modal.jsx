@@ -1,9 +1,8 @@
-import {useRef} from "react";
+import { useRef } from "react";
 import NewForm from "../NewForm/NewForm";
 import "./Modal.css";
-import "../NewForm/NewForm.css";
 
-function Modal({btnLabel, btnClassName}) {
+function Modal({ btnLabel, btnClassName }) {
     const modalRef = useRef();
 
     function handleclick(e) {
@@ -12,11 +11,18 @@ function Modal({btnLabel, btnClassName}) {
 
     return (
         <>
-        <button className={btnClassName} onClick={handleclick}> {btnLabel} </button>
-        <dialog ref={modalRef} className="modal">
-            <NewForm />
-        </dialog>
+            <button
+                className={btnClassName}
+                onClick={handleclick}>
+                {" "}
+                {btnLabel}{" "}
+            </button>
+            <dialog
+                ref={modalRef}
+                className='modal'>
+                <NewForm />
+            </dialog>
         </>
     );
 }
-    export default Modal;
+export default Modal;
