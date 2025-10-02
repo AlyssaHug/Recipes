@@ -38,5 +38,6 @@ function App() {
         </div>
     );
 }
+import Footer from "./components/Footer";
 
 export default App;

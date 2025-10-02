@@ -6,48 +6,13 @@
     --tertiary-color: #cd8c479c;
     --fourth-color: #ffc5869c;
     --light-color: #fce7b6;
-
+    
     /* Font Variables */
     --font-family: "Quicksand", arial;
     --font-size-large: 24px;
     --font-size-medium: 16px;
     --font-weight-bold: bold;
     --font-weight-medium: 500;
-}
-
-/*====Header Styles====*/
-header {
-    background-color: var(--secondary-color);
-    padding: 3em 4em;
-    justify-content: center;
-    margin-bottom: 5vh;
-    display: flex;
-    flex-wrap: wrap;
-    > .header-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-right: 60px;
-    }
-    .header-content h1 {
-        margin: 0;
-        font-size: 3em;
-        color: white;
-        text-align: center;
-    }
-    span {
-        font-weight: var(--font-weight-bold);
-    }
-    .header-content p {
-        margin: 0;
-        font-size: 1.25em;
-        color: var(--light-color);
-        margin-bottom: 20px;
-    }
-    img {
-        max-width: 400px;
-        border-radius: 10%;
-    }
 }
 
 /*====Card Styles====*/
@@ -100,15 +65,4 @@ a {
     background-color: var(--fourth-color);
     border: 15px solid var(--secondary-color);
     text-align: center;
-}
-
-/*====Footer Styles====*/
-footer {
-    background-color: var(--primary-color);
-    color: white;
-    text-align: center;
-    margin-top: 5vh;
-    padding: 1em 0;
-    bottom: 0;
-    width: 100%;
 }
