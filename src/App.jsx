@@ -28,7 +28,7 @@ function App() {
 
     return (
         <div>
-            <h1>Hello World!</h1>
+            <h1 className="title">Recipes Catalog</h1>
             <Add/>
             <div className='recipes'>{recipes.map(showRecipes)}</div>
         </div>
