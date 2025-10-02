@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Recipe from "./components/Card";
 import Add from "./components/Add";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 function App() {
     const [recipes, setRecipes] = useState([]);
@@ -33,8 +32,6 @@ function App() {
             <Header />
             <Add />
             <div className='recipes'>{recipes.map(showRecipes)}</div>
-
-            <Footer />
         </div>
     );
 }
