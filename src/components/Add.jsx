@@ -1,7 +1,9 @@
+import Modal from "./Modal/Modal";
+
 function Add() {
 return (
 <div>
-    <button className="button">Add New Recipe!</button>
+    <Modal btnLabel="Add New Recipe!" btnClassName="button">Add New Recipe!</Modal>
 </div>
 );
 }
