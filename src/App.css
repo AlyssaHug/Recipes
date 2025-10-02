@@ -13,12 +13,12 @@ main {
 }
 .content {
     display: grid;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 300px auto;
 }
+
 .recipes {
     display: flex;
     flex-wrap: wrap;
-    gap: 60px;
+    gap: 40px;
     padding: 0 2em;
-    justify-content: center;
 }

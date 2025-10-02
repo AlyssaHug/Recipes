@@ -22,32 +22,31 @@ header {
     justify-content: center;
     margin-bottom: 5vh;
     display: flex;
-    flex-wrap: wrap;
     > .header-content {
         display: flex;
         flex-direction: column;
         justify-content: center;
         margin-right: 60px;
     }
-    .header-content h1 {
-        margin: 0;
-        font-size: 3em;
-        color: white;
-        text-align: center;
-    }
-    span {
-        font-weight: var(--font-weight-bold);
-    }
-    .header-content p {
-        margin: 0;
-        font-size: 1.25em;
-        color: var(--light-color);
-        margin-bottom: 20px;
-    }
-    img {
-        max-width: 400px;
-        border-radius: 10%;
-    }
+}
+.header-content h1 {
+    margin: 0;
+    font-size: 3em;
+    color: white;
+    text-align: center;
+}
+span {
+    font-weight: var(--font-weight-bold);
+}
+.header-content p {
+    margin: 0;
+    font-size: 1.25em;
+    color: var(--light-color);
+    margin-bottom: 20px;
+}
+.header-img {
+    max-width: 200px;
+    border-radius: 10%;
 }
 
 /*====Card Styles====*/
@@ -95,11 +94,14 @@ a {
     height: 356px;
     font-family: var(--font-family);
     font-size: var(--font-size-large);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
     color: var(--secondary-color);
     background-color: var(--fourth-color);
-    border: 15px solid var(--secondary-color);
+    border: 12px solid var(--secondary-color);
     text-align: center;
+    margin-left: 24px;
+    cursor: pointer;
+    padding: 16px;
 }
 
 /*====Footer Styles====*/
