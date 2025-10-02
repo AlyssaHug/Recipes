@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Recipe from "./components/Card";
+import Add from "./components/Add";
 
 function App() {
     const [recipes, setRecipes] = useState([]);
@@ -28,6 +29,7 @@ function App() {
     return (
         <div>
             <h1>Hello World!</h1>
+            <Add/>
             <div className='recipes'>{recipes.map(showRecipes)}</div>
         </div>
     );
