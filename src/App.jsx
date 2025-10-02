@@ -31,9 +31,10 @@ function App() {
     return (
         <div>
             <Header />
-            <Add />
-            <div className='recipes'>{recipes.map(showRecipes)}</div>
-
+            <div className='content'>
+                <Add />
+                <div className='recipes'>{recipes.map(showRecipes)}</div>
+            </div>
             <Footer />
         </div>
     );
