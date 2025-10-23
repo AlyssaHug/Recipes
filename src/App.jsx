@@ -15,7 +15,7 @@ function App() {
         fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=")
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                    throw new Error("Uh Oh. Something went wrong! 😢");
                 }
                 return response.json();
             })
