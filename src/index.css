@@ -3,8 +3,8 @@
     /* Color Variables - using existing colors only */
     --primary-color: #ab411b;
     --secondary-color: #da760b;
-    --tertiary-color: #cd8c479c;
-    --fourth-color: #ffc5869c;
+    --tertiary-color: #e9b883;
+    --fourth-color: #ffc486;
     --light-color: #fce7b6;
 
     /* Font Variables */
@@ -87,7 +87,20 @@ a {
     max-width: 220px;
     margin: 20px;
 }
-
+.card.selected {
+    border: 6px solid var(--secondary-color);
+    color: var(--light-color);
+    background-color: var(--fourth-color);
+    .recipe_name {
+        color: var(--secondary-color);
+    }
+    .view,
+    a {
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+        font-weight: 800;
+    }
+}
 /*====Button Styles====*/
 .button {
     width: 264px;

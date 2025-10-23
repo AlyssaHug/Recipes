@@ -3,9 +3,6 @@ export default function Header() {
         <header className='header'>
             <div className='header-content'>
                 <h1 className='title'>Recipes Catalog 🥗</h1>
-                <p>
-                    <span>Members:</span> Alyssa, Angie, Thea, Sandy
-                </p>
             </div>
             <img
                 className='header-img'
