@@ -4,14 +4,18 @@ import Recipe from "./components/Card";
 import Add from "./components/Add";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { nanoid } from "nanoid";
 
 function App() {
     const [recipes, setRecipes] = useState([]);
+    const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=")
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                    throw new Error("Uh Oh. Something went wrong! 😢");
                 }
                 return response.json();
             })
@@ -21,19 +25,28 @@ function App() {
                 } else {
                     setError("No recipes found.");
                 }
+            })
+            .catch((err) => {
+                setError("Failed to fetch recipes: " + err.message);
             });
     }, []);
-
-    function showRecipes(recipe) {
-        return <Recipe recipe={recipe} />;
-    }
 
     return (
         <div>
             <Header />
             <div className='content'>
                 <Add />
-                <div className='recipes'>{recipes.map(showRecipes)}</div>
+                {error && <div className='error'>{error}</div>}
+                <div className='recipes'>
+                    {recipes.map((recipe) => (
+                        <Recipe
+                            key={recipe.idMeal}
+                            recipe={recipe}
+                            selectedRecipeId={selectedRecipeId}
+                            setSelectedRecipeId={setSelectedRecipeId}
+                        />
+                    ))}
+                </div>
             </div>
             <Footer />
         </div>

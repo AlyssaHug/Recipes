@@ -1,6 +1,16 @@
-function Recipe({ recipe }) {
+function Recipe({ recipe, setSelectedRecipeId, selectedRecipeId }) {
+    function handleClick() {
+        setSelectedRecipeId(
+            recipe.idMeal === selectedRecipeId ? null : recipe.idMeal
+        );
+    }
+
     return (
-        <div className='card'>
+        <div
+            className={`card ${
+                recipe.idMeal === selectedRecipeId ? "selected" : ""
+            }`}
+            onClick={handleClick}>
             <img
                 className='cardImg'
                 src={recipe.strMealThumb}
@@ -10,7 +20,8 @@ function Recipe({ recipe }) {
             <h3 className='view'>
                 <a
                     href={recipe.strSource || recipe.strYoutube}
-                    target='_blank'>
+                    target='_blank'
+                    rel='noopener noreferrer'>
                     View Full Recipe
                 </a>
             </h3>
