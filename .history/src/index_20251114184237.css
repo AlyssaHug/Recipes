@@ -101,51 +101,45 @@ a {
         font-weight: 800;
     }
 }
-
-/* Saving icon(archive) */
 .archive-icon {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
     border: 2px solid var(--primary-color);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 0.3s ease;
     z-index: 10;
     padding: 0;
 }
-
 .archive-icon:hover {
     background: var(--light-color);
+    transform: scale(1.1);
 }
-
 .archive-icon-img {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     display: block;
-    filter: brightness(0) saturate(100%) invert(25%) sepia(60%) saturate(2000%)
-        hue-rotate(350deg) brightness(0.7);
+    transition: all 0.3s ease;
+    filter: brightness(0) saturate(100%) invert(25%) sepia(60%) saturate(2000%) hue-rotate(350deg) brightness(0.7);
 }
-
 .archive-icon.filled {
     background: var(--secondary-color);
     border-color: var(--secondary-color);
 }
-
 .archive-icon.filled .archive-icon-img {
-    filter: brightness(0) invert(1);
+    filter: brightness(0) saturate(100%) invert(1);
 }
-
 .archive-icon.filled:hover {
     background: var(--primary-color);
     border-color: var(--primary-color);
 }
-
 /*====Button Styles====*/
 .button {
     width: 264px;

@@ -1,10 +1,4 @@
-function Recipe({
-    recipe,
-    setSelectedRecipeId,
-    selectedRecipeId,
-    isFavorite,
-    onToggleFavorite,
-}) {
+function Recipe({ recipe, setSelectedRecipeId, selectedRecipeId, isFavorite, onToggleFavorite }) {
     function handleClick() {
         setSelectedRecipeId(
             recipe.idMeal === selectedRecipeId ? null : recipe.idMeal
@@ -12,7 +6,7 @@ function Recipe({
     }
 
     function handleFavoriteClick(e) {
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent card selection when clicking the icon
         onToggleFavorite(recipe.idMeal);
     }
 
@@ -21,27 +15,15 @@ function Recipe({
             className={`card ${
                 recipe.idMeal === selectedRecipeId ? "selected" : ""
             }`}
-            onClick={handleClick}
-        >
+            onClick={handleClick}>
             <button
                 className={`archive-icon ${isFavorite ? "filled" : ""}`}
                 onClick={handleFavoriteClick}
-                aria-label={
-                    isFavorite ? "Remove from favorites" : "Add to favorites"
-                }
-            >
+                aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}>
                 <img
-                    src={
-                        isFavorite
-                            ? "/assets/archive-filled.svg"
-                            : "/assets/archive-outline.svg"
-                    }
-                    alt={
-                        isFavorite
-                            ? "Remove from favorites"
-                            : "Add to favorites"
-                    }
-                    className='archive-icon-img'
+                    src={isFavorite ? "/assets/archive-filled.svg" : "/assets/archive-outline.svg"}
+                    alt={isFavorite ? "Remove from favorites" : "Add to favorites"}
+                    className="archive-icon-img"
                 />
             </button>
             <img
@@ -54,8 +36,7 @@ function Recipe({
                 <a
                     href={recipe.strSource || recipe.strYoutube}
                     target='_blank'
-                    rel='noopener noreferrer'
-                >
+                    rel='noopener noreferrer'>
                     View Full Recipe
                 </a>
             </h3>
