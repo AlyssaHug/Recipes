@@ -119,33 +119,31 @@ a {
     z-index: 10;
     padding: 0;
 }
-
 .archive-icon:hover {
     background: var(--light-color);
 }
-
 .archive-icon-img {
     width: 25px;
     height: 25px;
     display: block;
-    filter: brightness(0) saturate(100%) invert(25%) sepia(60%) saturate(2000%)
-        hue-rotate(350deg) brightness(0.7);
+    /* Method 1: CSS Filter - Change color using filters */
+    /* For primary color (brownish): */
+    filter: brightness(0) saturate(100%) invert(25%) sepia(60%) saturate(2000%) hue-rotate(350deg) brightness(0.7);
+    /* For white: filter: brightness(0) invert(1); */
+    /* For black: filter: brightness(0); */
 }
-
 .archive-icon.filled {
     background: var(--secondary-color);
     border-color: var(--secondary-color);
 }
-
 .archive-icon.filled .archive-icon-img {
+    /* White icon for filled state */
     filter: brightness(0) invert(1);
 }
-
 .archive-icon.filled:hover {
     background: var(--primary-color);
     border-color: var(--primary-color);
 }
-
 /*====Button Styles====*/
 .button {
     width: 264px;

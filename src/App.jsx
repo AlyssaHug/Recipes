@@ -10,6 +10,7 @@ function App() {
     const [recipes, setRecipes] = useState([]);
     const [selectedRecipeId, setSelectedRecipeId] = useState(null);
     const [error, setError] = useState(null);
+    const [favorites, setFavorites] = useState(new Set());
 
     useEffect(() => {
         fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=")
@@ -31,6 +32,18 @@ function App() {
             });
     }, []);
 
+    const toggleFavorite = (recipeId) => {
+        setFavorites((prev) => {
+            const newFavorites = new Set(prev);
+            if (newFavorites.has(recipeId)) {
+                newFavorites.delete(recipeId);
+            } else {
+                newFavorites.add(recipeId);
+            }
+            return newFavorites;
+        });
+    };
+
     return (
         <div>
             <Header />
@@ -44,6 +57,8 @@ function App() {
                             recipe={recipe}
                             selectedRecipeId={selectedRecipeId}
                             setSelectedRecipeId={setSelectedRecipeId}
+                            isFavorite={favorites.has(recipe.idMeal)}
+                            onToggleFavorite={toggleFavorite}
                         />
                     ))}
                 </div>
