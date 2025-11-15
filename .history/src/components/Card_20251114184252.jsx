@@ -12,7 +12,7 @@ function Recipe({
     }
 
     function handleFavoriteClick(e) {
-        e.stopPropagation();
+        e.stopPropagation(); // Prevent card selection when clicking the icon
         onToggleFavorite(recipe.idMeal);
     }
 
