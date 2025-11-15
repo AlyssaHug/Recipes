@@ -31,11 +31,23 @@ function App() {
             });
     }, []);
 
+    function handleAddRecipe(recipeData) {
+        const newRecipe = {
+            idMeal: nanoid(),
+            strMeal: recipeData.name,
+            strMealThumb: recipeData.imageUrl,
+            strCategory: recipeData.category,
+            strSource: "",
+            strYoutube: ""
+        };
+        setRecipes([newRecipe, ...recipes]);
+    }
+
     return (
         <div>
             <Header />
             <div className='content'>
-                <Add />
+                <Add onAddRecipe={handleAddRecipe} />
                 {error && <div className='error'>{error}</div>}
                 <div className='recipes'>
                     {recipes.map((recipe) => (
