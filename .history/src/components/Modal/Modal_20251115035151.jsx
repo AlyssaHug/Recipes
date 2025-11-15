@@ -29,8 +29,7 @@ function Modal({ btnLabel, btnClassName, onSubmit }) {
             <dialog
                 ref={modalRef}
                 className='modal'>
-                <button className="close-button" onClick={handleClose}>×</button>
-                <NewForm onSubmit={handleSubmit} />
+                <NewForm onSubmit={handleSubmit} onClose={handleClose} />
             </dialog>
         </>
     );

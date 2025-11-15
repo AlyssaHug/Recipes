@@ -2,20 +2,11 @@ import { useRef } from "react";
 import NewForm from "../NewForm/NewForm";
 import "./Modal.css";
 
-function Modal({ btnLabel, btnClassName, onSubmit }) {
+function Modal({ btnLabel, btnClassName }) {
     const modalRef = useRef();
 
     function handleclick(e) {
         modalRef.current.showModal();
-    }
-
-    function handleClose() {
-        modalRef.current.close();
-    }
-
-    function handleSubmit(recipeData) {
-        onSubmit(recipeData);
-        handleClose();
     }
 
     return (
@@ -29,8 +20,7 @@ function Modal({ btnLabel, btnClassName, onSubmit }) {
             <dialog
                 ref={modalRef}
                 className='modal'>
-                <button className="close-button" onClick={handleClose}>×</button>
-                <NewForm onSubmit={handleSubmit} />
+                <NewForm />
             </dialog>
         </>
     );

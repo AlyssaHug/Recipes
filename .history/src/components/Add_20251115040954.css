@@ -1,0 +1,8 @@
+.add-container {
+    transition: color 0.2s ease;
+}
+
+.add-container:hover {
+    color: var(--secondary-color);
+}
+
