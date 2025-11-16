@@ -127,3 +127,29 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/*====Edit + Delete Styles ====*/
+
+.edit {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    font-weight: 800;
+    border-color: var(--secondary-color);
+    margin-left: 24px;
+    padding-right: 118px;
+    padding-left: 118px;
+    margin-top: 10px;
+    font-family: var(--font-family);
+}
+
+.delete {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    font-weight: 800;
+    border-color: var(--secondary-color);
+    margin-left: 24px;
+    padding-right: 109px;
+    padding-left: 109px;
+    margin-top: 10px;
+    font-family: var(--font-family);
+}
