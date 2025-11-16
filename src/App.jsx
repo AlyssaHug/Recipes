@@ -67,7 +67,7 @@ function App() {
             <Header />
             <div className='filter'>
                 <button
-                    classname='fav-filter'
+                    className='fav-filter'
                     onClick={() => setShowFavorites((prev) => !prev)}>
                     {showFavorites ? "Show All" : "Show Favorites"}
                 </button>

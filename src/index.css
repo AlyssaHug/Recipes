@@ -20,7 +20,6 @@ header {
     background-color: var(--secondary-color);
     padding: 3em 4em;
     justify-content: center;
-    margin-bottom: 5vh;
     display: flex;
     > .header-content {
         display: flex;
@@ -194,3 +193,18 @@ footer {
     transition: all 0.2s ease;
 }
 
+/*=== Filter Styles ===*/
+.filter {
+    margin: 12px;
+}
+.fav-filter {
+    padding: 8px;
+    margin-left: 0.8rem;
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    background-color: var(--primary-color);
+    color: var(--fourth-color);
+    font-weight: bold;
+    border: 3px solid var(--secondary-color);
+    border-radius: 12px;
+}
