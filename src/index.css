@@ -204,7 +204,7 @@ footer {
     font-size: var(--font-size-medium);
     background-color: var(--primary-color);
     color: var(--fourth-color);
-    font-weight: bold;
+    font-weight: bolder;
     border: 3px solid var(--secondary-color);
     border-radius: 12px;
 }
