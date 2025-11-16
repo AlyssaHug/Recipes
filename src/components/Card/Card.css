@@ -33,9 +33,12 @@
 }
 
 .cardImg {
-    max-width: 220px;
-    margin: 20px;
+    width: 240px;
+    height: 220px;
+    margin: 15px auto;
     border-radius: 12px;
+    object-fit: cover;
+    display: block;
 }
 
 .card.selected {
