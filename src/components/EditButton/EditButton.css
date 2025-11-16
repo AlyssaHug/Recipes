@@ -1,0 +1,21 @@
+/*====Edit + Delete Styles ====*/
+
+.edit,
+.delete {
+    display: block;
+    width: 100%;
+    max-width: 264px;
+    margin: 12px 0 0 24px;
+    padding: 14px 20px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 800;
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    text-align: center;
+    border: 3px solid var(--secondary-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+

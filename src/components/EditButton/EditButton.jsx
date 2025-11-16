@@ -1,6 +1,6 @@
-
-import Modal from "./Modal/Modal";
-import NewForm from "./NewForm/NewForm";
+import Modal from "../Modal/Modal";
+import NewForm from "../NewForm/NewForm";
+import "./EditButton.css";
 
 function EditButton({
   recipes,
@@ -30,3 +30,4 @@ function EditButton({
 }
 
 export default EditButton;
+

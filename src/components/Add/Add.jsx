@@ -1,6 +1,6 @@
-
-import Modal from "./Modal/Modal";
-import NewForm from "./NewForm/NewForm";
+import Modal from "../Modal/Modal";
+import NewForm from "../NewForm/NewForm";
+import "./Add.css";
 
 function Add({ onAddRecipe }) {
   return (
@@ -11,3 +11,4 @@ function Add({ onAddRecipe }) {
 }
 
 export default Add;
+

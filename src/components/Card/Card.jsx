@@ -1,3 +1,5 @@
+import "./Card.css";
+
 function Recipe({
     recipe,
     setSelectedRecipeId,
@@ -64,3 +66,4 @@ function Recipe({
 }
 
 export default Recipe;
+

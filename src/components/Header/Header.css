@@ -1,0 +1,41 @@
+/*====Header Styles====*/
+header {
+    background-color: var(--secondary-color);
+    padding: 3em 4em;
+    justify-content: center;
+    display: flex;
+}
+
+header > .header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 60px;
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 3em;
+    color: white;
+    text-align: center;
+}
+
+.header-content h1.title {
+    color: white;
+    font-weight: var(--font-weight-bold);
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.header-content p {
+    margin: 0;
+    font-size: 1.25em;
+    color: var(--light-color);
+    margin-bottom: 20px;
+}
+
+.header-img {
+    max-width: 200px;
+    border-radius: 10%;
+}
+

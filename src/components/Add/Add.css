@@ -1,0 +1,16 @@
+/*====Button Styles====*/
+.button {
+    width: 264px;
+    height: 356px;
+    font-family: var(--font-family);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    color: var(--secondary-color);
+    background-color: var(--fourth-color);
+    border: 12px solid var(--secondary-color);
+    text-align: center;
+    margin-left: 24px;
+    cursor: pointer;
+    padding: 16px;
+}
+

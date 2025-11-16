@@ -1,12 +1,13 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import Recipe from "./components/Card";
-import Add from "./components/Add";
-import EditButton from "./components/EditButton";
-import DeleteButton from "./components/DeleteButton";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Recipe from "./components/Card/Card";
+import Add from "./components/Add/Add";
+import EditButton from "./components/EditButton/EditButton";
+import DeleteButton from "./components/DeleteButton/DeleteButton";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Filter from "./components/Filter/Filter";
+import Favorites from "./components/Favorites/Favorites";
 import { nanoid } from "nanoid";
 
 function App() {
@@ -76,11 +77,10 @@ function App() {
         <div>
             <Header />
             <div className='filter'>
-                <button
-                    className='fav-filter'
-                    onClick={() => setShowFavorites((prev) => !prev)}>
-                    {showFavorites ? "Show All" : "Show Favorites"}
-                </button>
+                <Favorites
+                    showFavorites={showFavorites}
+                    onToggle={() => setShowFavorites((prev) => !prev)}
+                />
                 <Filter
                     selectedCategory={selectedCategory}
                     onCategoryChange={setSelectedCategory}
