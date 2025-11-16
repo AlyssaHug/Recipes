@@ -1,22 +1,30 @@
+
 import Modal from "./Modal/Modal";
 import NewForm from "./NewForm/NewForm";
 
+function EditButton({
+  recipes,
+  setRecipes,
+  selectedRecipeId,
+  setSelectedRecipeId,
+}) {
+  const selectedRecipe = recipes.find((r) => r.idMeal === selectedRecipeId);
 
-function EditButton({ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId }) {
-  const recipe = recipes.find(r => r.idMeal === selectedRecipeId);
-
-  function handleSubmit(data) {
-    setRecipes(recipes.map(r =>
-      r.idMeal === selectedRecipeId
-        ? { ...r, strMeal: data.name, strMealThumb: data.imageUrl, strCategory: data.category }
-        : r
-    ));
+  const handleUpdate = (updatedRecipe) => {
+    setRecipes((prev) =>
+      prev.map((r) => (r.idMeal === selectedRecipeId ? updatedRecipe : r))
+    );
     setSelectedRecipeId(null);
-  }
+  };
 
   return (
-    <Modal btnLabel="Edit" btnClassName="edit" disabled={!recipe}>
-      {recipe && <NewForm initialRecipe={{ name: recipe.strMeal, category: recipe.strCategory, imageUrl: recipe.strMealThumb }} onSubmit={handleSubmit} />}
+    <Modal
+      btnLabel="Edit"
+      btnClassName="edit"
+      disabled={!selectedRecipe}
+      onSubmit={handleUpdate}
+    >
+      {selectedRecipe && <NewForm recipe={selectedRecipe} />}
     </Modal>
   );
 }
