@@ -1,13 +1,12 @@
-/*====Edit + Delete Styles ====*/
+/*====Edit Button Styles ====*/
 
-.edit,
-.delete {
+.edit {
     display: block;
     width: 100%;
     max-width: 264px;
     margin: 12px 0 0 24px;
     padding: 14px 20px;
-    background-color: var(--secondary-color);
+    background-color: var(--fourth-color);
     color: var(--primary-color);
     font-weight: 800;
     font-family: var(--font-family);
@@ -17,5 +16,16 @@
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+.edit:hover {
+    background-color: var(--tertiary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.edit:active {
+    transform: translateY(0);
 }
 

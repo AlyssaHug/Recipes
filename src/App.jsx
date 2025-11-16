@@ -86,7 +86,7 @@ function App() {
                     onCategoryChange={setSelectedCategory}
                 />
             </div>
-            <div className='content'>
+            <main className='content'>
                 <div className='edit-delete-wrapper'>
                     <Add onAddRecipe={handleAddRecipe} />
                     {error && <div className='error'>{error}</div>}
@@ -119,7 +119,7 @@ function App() {
                         />
                     ))}
                 </div>
-            </div>
+            </main>
             <Footer />
         </div>
     );

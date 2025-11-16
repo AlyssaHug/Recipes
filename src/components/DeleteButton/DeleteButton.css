@@ -1,5 +1,4 @@
-/*====Delete Styles ====*/
-/* Shared styles with EditButton */
+/*====Delete Button Styles ====*/
 
 .delete {
     display: block;
@@ -7,15 +6,34 @@
     max-width: 264px;
     margin: 12px 0 0 24px;
     padding: 14px 20px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
     font-weight: 800;
     font-family: var(--font-family);
     font-size: var(--font-size-medium);
     text-align: center;
-    border: 3px solid var(--secondary-color);
+    border: 3px solid var(--primary-color);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+.delete:hover {
+    background-color: #8a3416;
+    border-color: #8a3416;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(171, 65, 27, 0.3);
+}
+
+.delete:active {
+    transform: translateY(0);
+}
+
+.delete:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 

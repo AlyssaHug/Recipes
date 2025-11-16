@@ -14,6 +14,9 @@ main {
 .content {
     display: grid;
     grid-template-columns: 300px auto;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2em;
 }
 
 .recipes {
@@ -22,3 +25,4 @@ main {
     gap: 40px;
     padding: 0 2em;
 }
+
