@@ -1,0 +1,46 @@
+/*====Delete Button Styles ====*/
+
+.delete {
+    display: block;
+    width: 100%;
+    max-width: 264px;
+    margin: 12px 0 0 24px;
+    padding: 14px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 800;
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    text-align: center;
+    border: 3px solid var(--primary-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete:hover {
+    background-color: #8a3416;
+    border-color: #8a3416;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(171, 65, 27, 0.3);
+}
+
+.delete:active {
+    transform: translateY(0);
+}
+
+.delete:disabled {
+    background-color: #d4a574;
+    border-color: #c49a6a;
+    color: #8b6f47;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.delete:disabled:hover {
+    background-color: #d4a574;
+    border-color: #c49a6a;
+    transform: none;
+    box-shadow: none;
+}
+

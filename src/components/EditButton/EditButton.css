@@ -1,0 +1,49 @@
+/*====Edit Button Styles ====*/
+
+.edit {
+    display: block;
+    width: 100%;
+    max-width: 264px;
+    margin: 12px 0 0 24px;
+    padding: 14px 20px;
+    background-color: var(--fourth-color);
+    color: var(--primary-color);
+    font-weight: 800;
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    text-align: center;
+    border: 3px solid var(--secondary-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit:hover {
+    background-color: var(--tertiary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.edit:active {
+    transform: translateY(0);
+}
+
+.edit:disabled,
+.edit[disabled] {
+    opacity: 0.6;
+    background-color: var(--light-color);
+    color: #8b6f47;
+    border-color: #d4a574;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.edit:disabled:hover,
+.edit[disabled]:hover {
+    background-color: var(--light-color);
+    border-color: #d4a574;
+    transform: none;
+    box-shadow: none;
+}
+

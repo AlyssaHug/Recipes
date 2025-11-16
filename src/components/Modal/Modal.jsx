@@ -1,19 +1,16 @@
-import { useRef } from "react";
+import { useRef, cloneElement, isValidElement } from "react";
 import "./Modal.css";
 
-function Modal({ btnLabel, btnClassName, children, disabled }) {
+function Modal({ btnLabel, btnClassName, children, disabled, onSubmit }) {
     const modalRef = useRef();
 
     const openModal = () => modalRef.current.showModal();
     const closeModal = () => modalRef.current.close();
 
-    const handleSubmit = (data) => {
-        const form = modalRef.current.querySelector("form");
-        if (form && form.onsubmit) {
-            form.onsubmit({ preventDefault: () => {} }); 
-        }
-        closeModal();
-    };
+    // Clone children and pass onSubmit and closeModal props
+    const childrenWithProps = isValidElement(children)
+        ? cloneElement(children, { onSubmit, closeModal })
+        : children;
 
     return (
         <>
@@ -30,7 +27,7 @@ function Modal({ btnLabel, btnClassName, children, disabled }) {
                     x
                 </button>
                 <div className="modal-content">
-                    {children}
+                    {childrenWithProps}
                 </div>
             </dialog>
         </>

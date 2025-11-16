@@ -1,0 +1,104 @@
+/*====Card Styles====*/
+.card {
+    width: 264px;
+    height: 356px;
+    position: relative;
+    align-items: center;
+    border: 6px solid var(--primary-color);
+    border-radius: 20px;
+    text-align: center;
+    background-color: var(--tertiary-color);
+    overflow: hidden;
+}
+
+.recipe_name {
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-large);
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.view,
+.view a {
+    text-decoration: none;
+    color: var(--light-color);
+    background-color: var(--primary-color);
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-medium);
+    margin: 4px 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cardImg {
+    width: 240px;
+    height: 220px;
+    margin: 15px auto;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+}
+
+.card.selected {
+    border: 6px solid var(--secondary-color);
+    color: var(--light-color);
+    background-color: var(--fourth-color);
+}
+
+.card.selected .recipe_name {
+    color: var(--secondary-color);
+}
+
+.card.selected .view,
+.card.selected .view a {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    font-weight: 800;
+}
+
+/* Saving icon(archive) */
+.archive-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+}
+
+.archive-icon:hover {
+    background: var(--light-color);
+}
+
+.archive-icon-img {
+    width: 25px;
+    height: 25px;
+    display: block;
+    filter: brightness(0) saturate(100%) invert(25%) sepia(60%) saturate(2000%)
+        hue-rotate(350deg) brightness(0.7);
+}
+
+.archive-icon.filled {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.archive-icon.filled .archive-icon-img {
+    filter: brightness(0) invert(1);
+}
+
+.archive-icon.filled:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+

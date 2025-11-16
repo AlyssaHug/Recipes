@@ -1,11 +1,13 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import Recipe from "./components/Card";
-import Add from "./components/Add";
-import EditButton from "./components/EditButton";
-import DeleteButton from "./components/DeleteButton";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Recipe from "./components/Card/Card";
+import Add from "./components/Add/Add";
+import EditButton from "./components/EditButton/EditButton";
+import DeleteButton from "./components/DeleteButton/DeleteButton";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Filter from "./components/Filter/Filter";
+import Favorites from "./components/Favorites/Favorites";
 import { nanoid } from "nanoid";
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
     const [error, setError] = useState(null);
     const [favorites, setFavorites] = useState(new Set());
     const [showFavorites, setShowFavorites] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
         fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=")
@@ -34,18 +37,28 @@ function App() {
                 setError("Failed to fetch recipes: " + err.message);
             });
     }, []);
-    const recipesToShow = showFavorites
-        ? recipes.filter((r) => favorites.has(r.idMeal))
-        : recipes;
+    const recipesToShow = recipes.filter((r) => {
+        // Filter by favorites if showFavorites is true
+        if (showFavorites && !favorites.has(r.idMeal)) {
+            return false;
+        }
+        // Filter by category if selectedCategory is set
+        if (selectedCategory && r.strCategory !== selectedCategory) {
+            return false;
+        }
+        return true;
+    });
 
     function handleAddRecipe(recipeData) {
+        // NewForm passes an object with strMeal, strMealThumb, strCategory
+        // So we can use it directly or map the properties
         const newRecipe = {
-            idMeal: nanoid(),
-            strMeal: recipeData.name,
-            strMealThumb: recipeData.imageUrl,
-            strCategory: recipeData.category,
-            strSource: "",
-            strYoutube: "",
+            idMeal: recipeData.idMeal || nanoid(),
+            strMeal: recipeData.strMeal || recipeData.name || "",
+            strMealThumb: recipeData.strMealThumb || recipeData.imageUrl || "",
+            strCategory: recipeData.strCategory || recipeData.category || "",
+            strSource: recipeData.strSource || "",
+            strYoutube: recipeData.strYoutube || "",
         };
         setRecipes([newRecipe, ...recipes]);
     }
@@ -63,49 +76,77 @@ function App() {
     };
 
     return (
-        <div>
+        <div className="app-container">
             <Header />
             <div className='filter'>
-                <button
-                    className='fav-filter'
-                    onClick={() => setShowFavorites((prev) => !prev)}>
-                    {showFavorites ? "Show All" : "Show Favorites"}
-                </button>
+                <Favorites
+                    showFavorites={showFavorites}
+                    onToggle={() => setShowFavorites((prev) => !prev)}
+                />
+                <Filter
+                    selectedCategory={selectedCategory}
+                    onCategoryChange={setSelectedCategory}
+                />
             </div>
-            <div className='content'>
-                <div className='edit-delete-wrapper'>
-                    <Add onAddRecipe={handleAddRecipe} />
-                    {error && <div className='error'>{error}</div>}
+            {showFavorites ? (
+                favorites.size === 0 ? (
+                    <main className='content'>
+                        <div className='no-favorites-message'>
+                            <p>There is no favorite card! Add some favorite recipe!</p>
+                        </div>
+                    </main>
+                ) : (
+                    <main className='content'>
+                        <div className='recipes'>
+                            {recipesToShow.map((recipe) => (
+                                <Recipe
+                                    key={recipe.idMeal}
+                                    recipe={recipe}
+                                    selectedRecipeId={selectedRecipeId}
+                                    setSelectedRecipeId={setSelectedRecipeId}
+                                    isFavorite={favorites.has(recipe.idMeal)}
+                                    onToggleFavorite={toggleFavorite}
+                                />
+                            ))}
+                        </div>
+                    </main>
+                )
+            ) : (
+                <main className='content'>
+                    <div className='edit-delete-wrapper'>
+                        <Add onAddRecipe={handleAddRecipe} />
+                        {error && <div className='error'>{error}</div>}
 
-                    <EditButton
-                        className='edit'
-                        recipes={recipes}
-                        setRecipes={setRecipes}
-                        selectedRecipeId={selectedRecipeId}
-                        setSelectedRecipeId={setSelectedRecipeId}
-                    />
-                    <DeleteButton
-                        className='delete'
-                        recipes={recipes}
-                        setRecipes={setRecipes}
-                        selectedRecipeId={selectedRecipeId}
-                        setSelectedRecipeId={setSelectedRecipeId}
-                    />
-                </div>
-
-                <div className='recipes'>
-                    {recipesToShow.map((recipe) => (
-                        <Recipe
-                            key={recipe.idMeal}
-                            recipe={recipe}
+                        <EditButton
+                            className='edit'
+                            recipes={recipes}
+                            setRecipes={setRecipes}
                             selectedRecipeId={selectedRecipeId}
                             setSelectedRecipeId={setSelectedRecipeId}
-                            isFavorite={favorites.has(recipe.idMeal)}
-                            onToggleFavorite={toggleFavorite}
                         />
-                    ))}
-                </div>
-            </div>
+                        <DeleteButton
+                            className='delete'
+                            recipes={recipes}
+                            setRecipes={setRecipes}
+                            selectedRecipeId={selectedRecipeId}
+                            setSelectedRecipeId={setSelectedRecipeId}
+                        />
+                    </div>
+
+                    <div className='recipes'>
+                        {recipesToShow.map((recipe) => (
+                            <Recipe
+                                key={recipe.idMeal}
+                                recipe={recipe}
+                                selectedRecipeId={selectedRecipeId}
+                                setSelectedRecipeId={setSelectedRecipeId}
+                                isFavorite={favorites.has(recipe.idMeal)}
+                                onToggleFavorite={toggleFavorite}
+                            />
+                        ))}
+                    </div>
+                </main>
+            )}
             <Footer />
         </div>
     );

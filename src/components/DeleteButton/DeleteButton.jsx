@@ -1,3 +1,5 @@
+import "./DeleteButton.css";
+
 function DeleteButton({ recipes, setRecipes, selectedRecipeId, setSelectedRecipeId }) {
   const handleDelete = () => {
     setRecipes(recipes.filter(r => r.idMeal !== selectedRecipeId));
@@ -12,3 +14,4 @@ function DeleteButton({ recipes, setRecipes, selectedRecipeId, setSelectedRecipe
 }
 
 export default DeleteButton;
+
