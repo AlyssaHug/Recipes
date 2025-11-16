@@ -1,35 +1,37 @@
 import { useRef } from "react";
-import NewForm from "../NewForm/NewForm";
 import "./Modal.css";
 
-function Modal({ btnLabel, btnClassName, onSubmit, disabled }) {
+function Modal({ btnLabel, btnClassName, children, disabled }) {
     const modalRef = useRef();
 
-    function handleclick() {
-        modalRef.current.showModal();
-    }
+    const openModal = () => modalRef.current.showModal();
+    const closeModal = () => modalRef.current.close();
 
-    function handleClose() {
-        modalRef.current.close();
-    }
-
-    function handleSubmit(recipeData) {
-        onSubmit(recipeData);
-        handleClose();
-    }
+    const handleSubmit = (data) => {
+        const form = modalRef.current.querySelector("form");
+        if (form && form.onsubmit) {
+            form.onsubmit({ preventDefault: () => {} }); 
+        }
+        closeModal();
+    };
 
     return (
         <>
             <button
                 className={btnClassName}
-                onClick={handleclick}
+                onClick={openModal}
                 disabled={disabled}
             >
                 {btnLabel}
             </button>
-            <dialog ref={modalRef} className='modal'>
-                <button className="close-button" onClick={handleClose}>×</button>
-                <NewForm onSubmit={handleSubmit} />
+
+            <dialog ref={modalRef} className="modal">
+                <button className="close-button" onClick={closeModal}>
+                    x
+                </button>
+                <div className="modal-content">
+                    {children}
+                </div>
             </dialog>
         </>
     );
