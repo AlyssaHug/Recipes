@@ -5,8 +5,10 @@
     position: relative;
     align-items: center;
     border: 6px solid var(--primary-color);
+    border-radius: 20px;
     text-align: center;
     background-color: var(--tertiary-color);
+    overflow: hidden;
 }
 
 .recipe_name {
@@ -27,11 +29,13 @@
     font-size: var(--font-size-medium);
     margin: 4px 8px 0;
     padding: 10px;
+    border-radius: 8px;
 }
 
 .cardImg {
     max-width: 220px;
     margin: 20px;
+    border-radius: 12px;
 }
 
 .card.selected {

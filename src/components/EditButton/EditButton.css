@@ -29,3 +29,21 @@
     transform: translateY(0);
 }
 
+.edit:disabled,
+.edit[disabled] {
+    opacity: 0.6;
+    background-color: var(--light-color);
+    color: #8b6f47;
+    border-color: #d4a574;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.edit:disabled:hover,
+.edit[disabled]:hover {
+    background-color: var(--light-color);
+    border-color: #d4a574;
+    transform: none;
+    box-shadow: none;
+}
+
