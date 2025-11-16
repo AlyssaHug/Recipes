@@ -196,10 +196,12 @@ footer {
 /*=== Filter Styles ===*/
 .filter {
     margin: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .fav-filter {
     padding: 8px;
-    margin-left: 0.8rem;
     font-family: var(--font-family);
     font-size: var(--font-size-medium);
     background-color: var(--primary-color);

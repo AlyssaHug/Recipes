@@ -6,6 +6,7 @@ import EditButton from "./components/EditButton";
 import DeleteButton from "./components/DeleteButton";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Filter from "./components/Filter/Filter";
 import { nanoid } from "nanoid";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     const [error, setError] = useState(null);
     const [favorites, setFavorites] = useState(new Set());
     const [showFavorites, setShowFavorites] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
         fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=")
@@ -34,9 +36,17 @@ function App() {
                 setError("Failed to fetch recipes: " + err.message);
             });
     }, []);
-    const recipesToShow = showFavorites
-        ? recipes.filter((r) => favorites.has(r.idMeal))
-        : recipes;
+    const recipesToShow = recipes.filter((r) => {
+        // Filter by favorites if showFavorites is true
+        if (showFavorites && !favorites.has(r.idMeal)) {
+            return false;
+        }
+        // Filter by category if selectedCategory is set
+        if (selectedCategory && r.strCategory !== selectedCategory) {
+            return false;
+        }
+        return true;
+    });
 
     function handleAddRecipe(recipeData) {
         const newRecipe = {
@@ -71,6 +81,10 @@ function App() {
                     onClick={() => setShowFavorites((prev) => !prev)}>
                     {showFavorites ? "Show All" : "Show Favorites"}
                 </button>
+                <Filter
+                    selectedCategory={selectedCategory}
+                    onCategoryChange={setSelectedCategory}
+                />
             </div>
             <div className='content'>
                 <div className='edit-delete-wrapper'>
