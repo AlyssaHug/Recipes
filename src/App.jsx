@@ -13,6 +13,7 @@ function App() {
     const [selectedRecipeId, setSelectedRecipeId] = useState(null);
     const [error, setError] = useState(null);
     const [favorites, setFavorites] = useState(new Set());
+    const [showFavorites, setShowFavorites] = useState(false);
 
     useEffect(() => {
         fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=")
@@ -33,6 +34,9 @@ function App() {
                 setError("Failed to fetch recipes: " + err.message);
             });
     }, []);
+    const recipesToShow = showFavorites
+        ? recipes.filter((r) => favorites.has(r.idMeal))
+        : recipes;
 
     function handleAddRecipe(recipeData) {
         const newRecipe = {
@@ -61,20 +65,27 @@ function App() {
     return (
         <div>
             <Header />
-            <div className="content">
-                  <div className="edit-delete-wrapper">
-                <Add onAddRecipe={handleAddRecipe} />
-                {error && <div className="error">{error}</div>}
-              
+            <div className='filter'>
+                <button
+                    classname='fav-filter'
+                    onClick={() => setShowFavorites((prev) => !prev)}>
+                    {showFavorites ? "Show All" : "Show Favorites"}
+                </button>
+            </div>
+            <div className='content'>
+                <div className='edit-delete-wrapper'>
+                    <Add onAddRecipe={handleAddRecipe} />
+                    {error && <div className='error'>{error}</div>}
+
                     <EditButton
-                        className="edit"
+                        className='edit'
                         recipes={recipes}
                         setRecipes={setRecipes}
                         selectedRecipeId={selectedRecipeId}
                         setSelectedRecipeId={setSelectedRecipeId}
                     />
                     <DeleteButton
-                        className="delete"
+                        className='delete'
                         recipes={recipes}
                         setRecipes={setRecipes}
                         selectedRecipeId={selectedRecipeId}
@@ -82,8 +93,8 @@ function App() {
                     />
                 </div>
 
-                <div className="recipes">
-                    {recipes.map((recipe) => (
+                <div className='recipes'>
+                    {recipesToShow.map((recipe) => (
                         <Recipe
                             key={recipe.idMeal}
                             recipe={recipe}
