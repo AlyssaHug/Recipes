@@ -76,7 +76,7 @@ function App() {
     };
 
     return (
-        <div>
+        <div className="app-container">
             <Header />
             <div className='filter'>
                 <Favorites
@@ -88,40 +88,65 @@ function App() {
                     onCategoryChange={setSelectedCategory}
                 />
             </div>
-            <main className='content'>
-                <div className='edit-delete-wrapper'>
-                    <Add onAddRecipe={handleAddRecipe} />
-                    {error && <div className='error'>{error}</div>}
+            {showFavorites ? (
+                favorites.size === 0 ? (
+                    <main className='content'>
+                        <div className='no-favorites-message'>
+                            <p>There is no favorite card! Add some favorite recipe!</p>
+                        </div>
+                    </main>
+                ) : (
+                    <main className='content'>
+                        <div className='recipes'>
+                            {recipesToShow.map((recipe) => (
+                                <Recipe
+                                    key={recipe.idMeal}
+                                    recipe={recipe}
+                                    selectedRecipeId={selectedRecipeId}
+                                    setSelectedRecipeId={setSelectedRecipeId}
+                                    isFavorite={favorites.has(recipe.idMeal)}
+                                    onToggleFavorite={toggleFavorite}
+                                />
+                            ))}
+                        </div>
+                    </main>
+                )
+            ) : (
+                <main className='content'>
+                    <div className='edit-delete-wrapper'>
+                        <Add onAddRecipe={handleAddRecipe} />
+                        {error && <div className='error'>{error}</div>}
 
-                    <EditButton
-                        className='edit'
-                        recipes={recipes}
-                        setRecipes={setRecipes}
-                        selectedRecipeId={selectedRecipeId}
-                        setSelectedRecipeId={setSelectedRecipeId}
-                    />
-                    <DeleteButton
-                        className='delete'
-                        recipes={recipes}
-                        setRecipes={setRecipes}
-                        selectedRecipeId={selectedRecipeId}
-                        setSelectedRecipeId={setSelectedRecipeId}
-                    />
-                </div>
-
-                <div className='recipes'>
-                    {recipesToShow.map((recipe) => (
-                        <Recipe
-                            key={recipe.idMeal}
-                            recipe={recipe}
+                        <EditButton
+                            className='edit'
+                            recipes={recipes}
+                            setRecipes={setRecipes}
                             selectedRecipeId={selectedRecipeId}
                             setSelectedRecipeId={setSelectedRecipeId}
-                            isFavorite={favorites.has(recipe.idMeal)}
-                            onToggleFavorite={toggleFavorite}
                         />
-                    ))}
-                </div>
-            </main>
+                        <DeleteButton
+                            className='delete'
+                            recipes={recipes}
+                            setRecipes={setRecipes}
+                            selectedRecipeId={selectedRecipeId}
+                            setSelectedRecipeId={setSelectedRecipeId}
+                        />
+                    </div>
+
+                    <div className='recipes'>
+                        {recipesToShow.map((recipe) => (
+                            <Recipe
+                                key={recipe.idMeal}
+                                recipe={recipe}
+                                selectedRecipeId={selectedRecipeId}
+                                setSelectedRecipeId={setSelectedRecipeId}
+                                isFavorite={favorites.has(recipe.idMeal)}
+                                onToggleFavorite={toggleFavorite}
+                            />
+                        ))}
+                    </div>
+                </main>
+            )}
             <Footer />
         </div>
     );
