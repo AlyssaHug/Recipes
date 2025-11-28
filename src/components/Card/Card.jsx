@@ -6,6 +6,8 @@ function Recipe({
     selectedRecipeId,
     isFavorite,
     onToggleFavorite,
+    onShowDetails,
+    hideDetailsButton = false,
 }) {
     function handleClick() {
         setSelectedRecipeId(
@@ -23,15 +25,13 @@ function Recipe({
             className={`card ${
                 recipe.idMeal === selectedRecipeId ? "selected" : ""
             }`}
-            onClick={handleClick}
-        >
+            onClick={handleClick}>
             <button
                 className={`archive-icon ${isFavorite ? "filled" : ""}`}
                 onClick={handleFavoriteClick}
                 aria-label={
                     isFavorite ? "Remove from favorites" : "Add to favorites"
-                }
-            >
+                }>
                 <img
                     src={
                         isFavorite
@@ -52,18 +52,17 @@ function Recipe({
                 alt={recipe.strMeal}
             />
             <h3 className='recipe_name'>{recipe.strMeal}</h3>
-            <h3 className='view'>
-                <a
-                    href={recipe.strSource || recipe.strYoutube}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    View Full Recipe
-                </a>
-            </h3>
+
+            <button
+                className='view'
+                onClick={(e) => {
+                    e.stopPropagation();
+                    onShowDetails();
+                }}>
+                View Full Recipe
+            </button>
         </div>
     );
 }
 
 export default Recipe;
-
