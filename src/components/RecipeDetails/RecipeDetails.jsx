@@ -1,3 +1,4 @@
+import "./RecipeDetails.css";
 export default function RecipeDetails({ recipe, onClose, children }) {
     const img = recipe.strMealThumb || recipe.imageUrl || "";
 
@@ -24,16 +25,18 @@ export default function RecipeDetails({ recipe, onClose, children }) {
                 Close
             </button>
             <div className='details-grid'>
-                {img && (
-                    <img
-                        src={img}
-                        alt={recipe.strMeal || recipe.name}
-                        className='details-cover'
-                        onError={(e) => (e.target.style.display = "none")}
-                    />
-                )}
-                <div className='ingredient-info'>
+                <div className='Recipe-stack'>
                     <h1>{recipe.strMeal || recipe.name}</h1>
+                    {img && (
+                        <img
+                            src={img}
+                            alt={recipe.strMeal || recipe.name}
+                            className='details-cover'
+                            onError={(e) => (e.target.style.display = "none")}
+                        />
+                    )}
+                </div>
+                <div className='ingredient-info'>
                     {ingredients.length > 0 ? (
                         <>
                             <h2>Ingredients</h2>
@@ -49,18 +52,22 @@ export default function RecipeDetails({ recipe, onClose, children }) {
                         <p>No ingredients available for this recipe.</p>
                     )}
                 </div>
-                <div className='instructions'>
-                    {instructions.length > 0 ? (
-                        <>
-                            <h2>Instructions</h2>
-                            {instructions.map((step, index) => (
-                                <p key={index}>{step}</p>
-                            ))}
-                        </>
-                    ) : (
-                        <p>No instructions available for this recipe.</p>
-                    )}
-                </div>
+            </div>
+            <div className='instructions'>
+                {instructions.length > 0 ? (
+                    <>
+                        <h2>Instructions</h2>
+                        {instructions.map((step, index) => (
+                            <p
+                                key={index}
+                                className='step'>
+                                {step}
+                            </p>
+                        ))}
+                    </>
+                ) : (
+                    <p>No instructions available for this recipe.</p>
+                )}
             </div>
             {children}{" "}
             {/* If you need to render additional content passed as children */}

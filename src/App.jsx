@@ -9,7 +9,7 @@ import Footer from "./components/Footer/Footer";
 import Filter from "./components/Filter/Filter";
 import Favorites from "./components/Favorites/Favorites";
 import { nanoid } from "nanoid";
-import RecipeDetails from "./components/RecipeDetails";
+import RecipeDetails from "./components/RecipeDetails/RecipeDetails";
 
 function App() {
     const [recipes, setRecipes] = useState([]);
@@ -81,19 +81,6 @@ function App() {
         <div className='app-container'>
             <Header />
             <main>
-                {/* Toolbar*/}
-                <div className='filter'>
-                    <Favorites
-                        showFavorites={showFavorites}
-                        onToggle={() => setShowFavorites((p) => !p)}
-                    />
-                    <Filter
-                        selectedCategory={selectedCategory}
-                        onCategoryChange={setSelectedCategory}
-                        recipes={recipes}
-                    />
-                </div>
-
                 {/* DETAIL VIEW */}
                 {detailRecipe ? (
                     <RecipeDetails
@@ -105,6 +92,18 @@ function App() {
                         }></RecipeDetails>
                 ) : (
                     <>
+                        {/* Toolbar*/}
+                        <div className='filter'>
+                            <Favorites
+                                showFavorites={showFavorites}
+                                onToggle={() => setShowFavorites((p) => !p)}
+                            />
+                            <Filter
+                                selectedCategory={selectedCategory}
+                                onCategoryChange={setSelectedCategory}
+                                recipes={recipes}
+                            />
+                        </div>
                         {/* Content */}
                         <div className='content'>
                             <div className='edit-delete-wrapper'>
