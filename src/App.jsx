@@ -129,6 +129,10 @@ function App() {
                                     <Recipe
                                         key={recipe.idMeal}
                                         recipe={recipe}
+                                        selectedRecipeId={selectedRecipeId}
+                                        setSelectedRecipeId={
+                                            setSelectedRecipeId
+                                        }
                                         isFavorite={favorites.has(
                                             recipe.idMeal
                                         )}
