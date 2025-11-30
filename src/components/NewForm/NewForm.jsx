@@ -6,6 +6,12 @@ import "./NewForm.css";
 function NewForm({ recipe, onSubmit, closeModal }) {
   const isEditing = !!recipe;
 
+  // Parse existing instructions into steps (split by newlines)
+  const parseInstructions = (instructions) => {
+    if (!instructions) return [""];
+    const steps = instructions.split(/\r?\n/).filter((step) => step.trim());
+    return steps.length > 0 ? steps : [""];
+  };
 
   const initial = isEditing
     ? {
@@ -15,8 +21,10 @@ function NewForm({ recipe, onSubmit, closeModal }) {
       }
     : { name: "", category: "", imageUrl: "" };
 
-
   const [categories, setCategories] = useState([]);
+  const [instructionSteps, setInstructionSteps] = useState(
+    isEditing ? parseInstructions(recipe.strInstructions) : [""]
+  );
 
   useEffect(() => {
     fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
@@ -25,16 +33,42 @@ function NewForm({ recipe, onSubmit, closeModal }) {
       .catch(() => {});
   }, []);
 
+  const addInstructionStep = (index) => {
+    const newSteps = [...instructionSteps];
+    newSteps.splice(index + 1, 0, "");
+    setInstructionSteps(newSteps);
+  };
+
+  const removeInstructionStep = (index) => {
+    if (instructionSteps.length > 1) {
+      const newSteps = instructionSteps.filter((_, i) => i !== index);
+      setInstructionSteps(newSteps);
+    }
+  };
+
+  const updateInstructionStep = (index, value) => {
+    const newSteps = [...instructionSteps];
+    newSteps[index] = value;
+    setInstructionSteps(newSteps);
+  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+
+    // Join instruction steps with newlines, filtering out empty steps
+    const instructions = instructionSteps
+      .map((step) => step.trim())
+      .filter((step) => step.length > 0)
+      .join("\n");
 
     const newRecipe = {
       idMeal: isEditing ? recipe.idMeal : nanoid(),
       strMeal: data.get("name")?.trim() || "",
       strCategory: data.get("category")?.trim() || "",
       strMealThumb: data.get("imageUrl")?.trim() || "",
+      strInstructions: instructions,
       strSource: "",
       strYoutube: "",
     };
@@ -90,6 +124,47 @@ function NewForm({ recipe, onSubmit, closeModal }) {
             placeholder="https://example.com/image.jpg"
             required
           />
+        </div>
+
+        <div className="form-control">
+          <label>Instructions</label>
+          <div className="instructions-container">
+            {instructionSteps.map((step, index) => {
+              const isLastStep = index === instructionSteps.length - 1;
+              return (
+                <div key={index} className="instruction-step">
+                  <div className="step-input-wrapper">
+                    <input
+                      type="text"
+                      value={step}
+                      onChange={(e) => updateInstructionStep(index, e.target.value)}
+                      placeholder={`Step ${index + 1}...`}
+                      className="step-input"
+                    />
+                    {isLastStep ? (
+                      <button
+                        type="button"
+                        onClick={() => addInstructionStep(index)}
+                        className="add-step-button"
+                        aria-label="Add next step"
+                      >
+                        +
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => removeInstructionStep(index)}
+                        className="remove-step-button"
+                        aria-label="Remove step"
+                      >
+                        −
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <button className="create-button" type="submit">
