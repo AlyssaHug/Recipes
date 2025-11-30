@@ -109,6 +109,76 @@
     box-shadow: 0 2px 8px rgba(171, 65, 27, 0.3);
 }
 
+/*====Ingredients Styles====*/
+.ingredients-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ingredient-step {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ingredient-step .step-label {
+    font-size: 14px !important;
+    color: var(--primary-color);
+    font-style: italic;
+    font-weight: normal !important;
+    margin-top: 5px;
+    letter-spacing: 0.3px;
+    display: block;
+}
+
+.ingredient-input-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+}
+
+.ingredient-measure-input {
+    flex: 0 0 120px;
+    padding: 12px 16px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    font-size: var(--font-size-medium);
+    font-family: var(--font-family);
+    background-color: white;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.ingredient-name-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    font-size: var(--font-size-medium);
+    font-family: var(--font-family);
+    background-color: white;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.ingredient-measure-input:focus,
+.ingredient-name-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(171, 65, 27, 0.1);
+    transform: translateY(-1px);
+}
+
+.ingredient-measure-input::placeholder,
+.ingredient-name-input::placeholder {
+    color: rgba(171, 65, 27, 0.5);
+    font-style: italic;
+}
+
 /*====Instruction Steps Styles====*/
 .instructions-container {
     display: flex;

@@ -52,13 +52,14 @@ function App() {
     });
 
     function handleAddRecipe(recipeData) {
-        // NewForm passes an object with strMeal, strMealThumb, strCategory, strInstructions
-        // So we can use it directly or map the properties
+        // NewForm passes an object with strMeal, strMealThumb, strCategory, strInstructions, and ingredients
+        // Preserve all properties including ingredients (strIngredient1-20, strMeasure1-20)
         const newRecipe = {
+            ...recipeData, // Spread all properties first (includes ingredients)
             idMeal: recipeData.idMeal || nanoid(),
-            strMeal: recipeData.strMeal || recipeData.name || "",
-            strMealThumb: recipeData.strMealThumb || recipeData.imageUrl || "",
-            strCategory: recipeData.strCategory || recipeData.category || "",
+            strMeal: recipeData.strMeal || recipeData.name || recipeData.strMeal || "",
+            strMealThumb: recipeData.strMealThumb || recipeData.imageUrl || recipeData.strMealThumb || "",
+            strCategory: recipeData.strCategory || recipeData.category || recipeData.strCategory || "",
             strInstructions: recipeData.strInstructions || "",
             strSource: recipeData.strSource || "",
             strYoutube: recipeData.strYoutube || "",
