@@ -8,9 +8,13 @@ const isOnlyNumber = (step) => {
     return numberOnlyPattern.test(trimmed);
 };
 
-export default function RecipeDetails({ recipe, onClose, children, isFavorite, onToggleFavorite }) {
-   
-   
+export default function RecipeDetails({
+    recipe,
+    onClose,
+    children,
+    isFavorite,
+    onToggleFavorite,
+}) {
     const img = recipe.strMealThumb || recipe.imageUrl || "";
 
     // Extract ingredients and measures into a list (filter out empty ones)
@@ -26,19 +30,27 @@ export default function RecipeDetails({ recipe, onClose, children, isFavorite, o
     // Split instructions by newlines and filter out number-only steps
     const instructions = recipe.strInstructions
         ? recipe.strInstructions
-            .split(/\r?\n/)
-            .map((line) => line.trim())
-            .filter((line) => line.length > 0 && !isOnlyNumber(line))
+              .split(/\r?\n/)
+              .map((line) => line.trim())
+              .filter((line) => line.length > 0 && !isOnlyNumber(line))
         : [];
 
-   const handleViewOriginalRecipe = () => {
+    const handleViewOriginalRecipe = () => {
         // If recipe has a source URL, open that
         if (recipe.strSource && recipe.strSource.trim()) {
-            window.open(recipe.strSource.trim(), "_blank", "noopener,noreferrer");
-        } 
+            window.open(
+                recipe.strSource.trim(),
+                "_blank",
+                "noopener,noreferrer"
+            );
+        }
         // Otherwise, if it's an API recipe, open the themealdb link
         else if (recipe.idMeal) {
-            window.open(`https://www.themealdb.com/meal/${recipe.idMeal}`, "_blank", "noopener,noreferrer");
+            window.open(
+                `https://www.themealdb.com/meal/${recipe.idMeal}`,
+                "_blank",
+                "noopener,noreferrer"
+            );
         }
     };
 
@@ -46,7 +58,8 @@ export default function RecipeDetails({ recipe, onClose, children, isFavorite, o
         <div className='recipe-Details'>
             <button
                 className='close-details'
-                onClick={onClose}>
+                onClick={onClose}
+            >
                 Return to Recipes Catalog ⏎
             </button>
             <div className='details-grid'>
@@ -68,7 +81,8 @@ export default function RecipeDetails({ recipe, onClose, children, isFavorite, o
                             <ul>
                                 {ingredients.map((item, index) => (
                                     <li key={index}>
-                                        {item.measure ? `${item.measure} ` : ""}{item.ingredient}
+                                        {item.measure ? `${item.measure} ` : ""}
+                                        {item.ingredient}
                                     </li>
                                 ))}
                             </ul>
@@ -79,11 +93,16 @@ export default function RecipeDetails({ recipe, onClose, children, isFavorite, o
                     <div className='button-group'>
                         {onToggleFavorite && (
                             <button
-                                className={`favorite-button ${isFavorite ? "favorited" : ""}`}
+                                className={`favorite-button ${
+                                    isFavorite ? "favorited" : ""
+                                }`}
                                 onClick={onToggleFavorite}
                                 aria-label={
-                                    isFavorite ? "Remove from favorites" : "Add to favorites"
-                                }>
+                                    isFavorite
+                                        ? "Remove from favorites"
+                                        : "Add to favorites"
+                                }
+                            >
                                 <img
                                     src={
                                         isFavorite
@@ -97,12 +116,14 @@ export default function RecipeDetails({ recipe, onClose, children, isFavorite, o
                                     }
                                     className='favorite-icon'
                                 />
-                                {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                                {isFavorite
+                                    ? "Remove from Favorites"
+                                    : "Add to Favorites"}
                             </button>
                         )}
                         {(recipe.strSource || recipe.idMeal) && (
                             <button
-                                className="view-recipe-btn"
+                                className='view-recipe-btn'
                                 onClick={handleViewOriginalRecipe}
                             >
                                 View Full Recipe
@@ -118,7 +139,8 @@ export default function RecipeDetails({ recipe, onClose, children, isFavorite, o
                         {instructions.map((step, index) => (
                             <p
                                 key={index}
-                                className='step'>
+                                className='step'
+                            >
                                 <strong>Step {index + 1}:</strong>
                                 <br />
                                 {step}

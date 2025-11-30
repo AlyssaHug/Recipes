@@ -39,3 +39,52 @@ header > .header-content {
     border-radius: 10%;
 }
 
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+    header {
+        padding: 2em 1.5em;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+    }
+
+    header > .header-content {
+        margin-right: 0;
+        flex: 1;
+        min-width: 100%;
+        text-align: center;
+    }
+
+    .header-content h1 {
+        font-size: 2em;
+        word-wrap: break-word;
+    }
+
+    .header-img {
+        max-width: 120px;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 1.5em 1em;
+        flex-direction: column;
+    }
+
+    header > .header-content {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .header-content h1 {
+        font-size: 1.5em;
+    }
+
+    .header-img {
+        max-width: 80px;
+        height: auto;
+    }
+}
+

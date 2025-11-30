@@ -104,3 +104,30 @@
     background: var(--primary-color);
     border-color: var(--primary-color);
 }
+
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        min-height: 356px;
+    }
+
+    .cardImg {
+        width: calc(100% - 30px);
+        max-width: 240px;
+        height: auto;
+        aspect-ratio: 240 / 220;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        max-width: 100%;
+    }
+
+    .cardImg {
+        width: calc(100% - 30px);
+    }
+}

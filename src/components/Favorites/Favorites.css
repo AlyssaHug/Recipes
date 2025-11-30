@@ -7,5 +7,15 @@
     font-weight: bolder;
     border: 3px solid var(--secondary-color);
     border-radius: 12px;
+    white-space: nowrap;
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 480px) {
+    .fav-filter {
+        font-size: 14px;
+        padding: 6px 10px;
+        white-space: nowrap;
+    }
 }
 

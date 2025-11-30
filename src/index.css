@@ -25,4 +25,15 @@ span {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 500px) {
+    .filter {
+        margin: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
