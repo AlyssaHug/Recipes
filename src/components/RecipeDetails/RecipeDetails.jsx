@@ -1,5 +1,14 @@
 import "./RecipeDetails.css";
-export default function RecipeDetails({ recipe, onClose, children }) {
+
+// Check if a step contains only a number (with optional "step" prefix)
+const isOnlyNumber = (step) => {
+    const trimmed = step.trim();
+    // Match patterns like "2", "step2", "Step 2", "step 2", etc. (case-insensitive)
+    const numberOnlyPattern = /^(step\s*)?\d+$/i;
+    return numberOnlyPattern.test(trimmed);
+};
+
+export default function RecipeDetails({ recipe, onClose, children, isFavorite, onToggleFavorite }) {
    
    
     const img = recipe.strMealThumb || recipe.imageUrl || "";
@@ -14,13 +23,21 @@ export default function RecipeDetails({ recipe, onClose, children }) {
         }
     }
 
-    // Split instructions by newlines for paragraphs (if available)
+    // Split instructions by newlines and filter out number-only steps
     const instructions = recipe.strInstructions
-        ? recipe.strInstructions.split(/\r?\n/).filter((line) => line.trim())
+        ? recipe.strInstructions
+            .split(/\r?\n/)
+            .map((line) => line.trim())
+            .filter((line) => line.length > 0 && !isOnlyNumber(line))
         : [];
 
    const handleViewOriginalRecipe = () => {
-        if (recipe.idMeal) {
+        // If recipe has a source URL, open that
+        if (recipe.strSource && recipe.strSource.trim()) {
+            window.open(recipe.strSource.trim(), "_blank", "noopener,noreferrer");
+        } 
+        // Otherwise, if it's an API recipe, open the themealdb link
+        else if (recipe.idMeal) {
             window.open(`https://www.themealdb.com/meal/${recipe.idMeal}`, "_blank", "noopener,noreferrer");
         }
     };
@@ -30,7 +47,7 @@ export default function RecipeDetails({ recipe, onClose, children }) {
             <button
                 className='close-details'
                 onClick={onClose}>
-                Close
+                Return to Recipes Catalog ⏎
             </button>
             <div className='details-grid'>
                 <div className='Recipe-stack'>
@@ -51,7 +68,7 @@ export default function RecipeDetails({ recipe, onClose, children }) {
                             <ul>
                                 {ingredients.map((item, index) => (
                                     <li key={index}>
-                                        {item.measure} {item.ingredient}
+                                        {item.measure ? `${item.measure} ` : ""}{item.ingredient}
                                     </li>
                                 ))}
                             </ul>
@@ -59,6 +76,39 @@ export default function RecipeDetails({ recipe, onClose, children }) {
                     ) : (
                         <p>No ingredients available for this recipe.</p>
                     )}
+                    <div className='button-group'>
+                        {onToggleFavorite && (
+                            <button
+                                className={`favorite-button ${isFavorite ? "favorited" : ""}`}
+                                onClick={onToggleFavorite}
+                                aria-label={
+                                    isFavorite ? "Remove from favorites" : "Add to favorites"
+                                }>
+                                <img
+                                    src={
+                                        isFavorite
+                                            ? "/assets/archive-filled.svg"
+                                            : "/assets/archive-outline.svg"
+                                    }
+                                    alt={
+                                        isFavorite
+                                            ? "Remove from favorites"
+                                            : "Add to favorites"
+                                    }
+                                    className='favorite-icon'
+                                />
+                                {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                            </button>
+                        )}
+                        {(recipe.strSource || recipe.idMeal) && (
+                            <button
+                                className="view-recipe-btn"
+                                onClick={handleViewOriginalRecipe}
+                            >
+                                View Full Recipe
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
             <div className='instructions'>
@@ -69,6 +119,8 @@ export default function RecipeDetails({ recipe, onClose, children }) {
                             <p
                                 key={index}
                                 className='step'>
+                                <strong>Step {index + 1}:</strong>
+                                <br />
                                 {step}
                             </p>
                         ))}
@@ -77,16 +129,6 @@ export default function RecipeDetails({ recipe, onClose, children }) {
                     <p>No instructions available for this recipe.</p>
                 )}
             </div>
-           {recipe.idMeal && (
-                <div className="view-recipe-section">
-                    <button
-                        className="view-recipe-btn"
-                        onClick={handleViewOriginalRecipe}
-                    >
-                        View Recipe
-                    </button>
-                </div>
-            )}
             {children}{" "}
             {/* If you need to render additional content passed as children */}
         </div>
