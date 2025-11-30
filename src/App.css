@@ -23,6 +23,8 @@ body {
 main {
     flex: 1 0 auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 .content {
     display: grid;
@@ -36,6 +38,11 @@ main {
 .content:has(.recipes):not(:has(.edit-delete-wrapper)) {
     grid-template-columns: 1fr;
     justify-items: center;
+}
+
+.edit-delete-wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .recipes {
@@ -66,3 +73,24 @@ main {
     max-width: 600px;
 }
 
+/* Responsive styles for small screens */
+@media (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr;
+        padding: 1em;
+    }
+
+    .edit-delete-wrapper {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1em;
+        margin-bottom: 2em;
+    }
+
+    .recipes {
+        padding: 0;
+        justify-content: center;
+        gap: 20px;
+    }
+}
