@@ -1,5 +1,7 @@
 import "./RecipeDetails.css";
 export default function RecipeDetails({ recipe, onClose, children }) {
+   
+   
     const img = recipe.strMealThumb || recipe.imageUrl || "";
 
     // Extract ingredients and measures into a list (filter out empty ones)
@@ -16,6 +18,12 @@ export default function RecipeDetails({ recipe, onClose, children }) {
     const instructions = recipe.strInstructions
         ? recipe.strInstructions.split(/\r?\n/).filter((line) => line.trim())
         : [];
+
+   const handleViewOriginalRecipe = () => {
+        if (recipe.idMeal) {
+            window.open(`https://www.themealdb.com/meal/${recipe.idMeal}`, "_blank", "noopener,noreferrer");
+        }
+    };
 
     return (
         <div className='recipe-Details'>
@@ -69,6 +77,16 @@ export default function RecipeDetails({ recipe, onClose, children }) {
                     <p>No instructions available for this recipe.</p>
                 )}
             </div>
+           {recipe.idMeal && (
+                <div className="view-recipe-section">
+                    <button
+                        className="view-recipe-btn"
+                        onClick={handleViewOriginalRecipe}
+                    >
+                        View Recipe
+                    </button>
+                </div>
+            )}
             {children}{" "}
             {/* If you need to render additional content passed as children */}
         </div>
