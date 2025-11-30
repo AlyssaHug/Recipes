@@ -1,29 +1,31 @@
 
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "./NewForm.css";
+
+// Parse existing instructions into steps (split by newlines)
+const parseInstructions = (instructions) => {
+  if (!instructions) return [""];
+  const steps = instructions.split(/\r?\n/).filter((step) => step.trim());
+  return steps.length > 0 ? steps : [""];
+};
 
 function NewForm({ recipe, onSubmit, closeModal }) {
   const isEditing = !!recipe;
 
-  // Parse existing instructions into steps (split by newlines)
-  const parseInstructions = (instructions) => {
-    if (!instructions) return [""];
-    const steps = instructions.split(/\r?\n/).filter((step) => step.trim());
-    return steps.length > 0 ? steps : [""];
-  };
-
-  const initial = isEditing
-    ? {
-        name: recipe.strMeal || "",
-        category: recipe.strCategory || "",
-        imageUrl: recipe.strMealThumb || "",
-      }
-    : { name: "", category: "", imageUrl: "" };
+  const initial = useMemo(() => {
+    return isEditing
+      ? {
+          name: recipe.strMeal || "",
+          category: recipe.strCategory || "",
+          imageUrl: recipe.strMealThumb || "",
+        }
+      : { name: "", category: "", imageUrl: "" };
+  }, [recipe, isEditing]);
 
   const [categories, setCategories] = useState([]);
   const [instructionSteps, setInstructionSteps] = useState(
-    isEditing ? parseInstructions(recipe.strInstructions) : [""]
+    isEditing ? parseInstructions(recipe?.strInstructions) : [""]
   );
 
   useEffect(() => {
@@ -32,6 +34,18 @@ function NewForm({ recipe, onSubmit, closeModal }) {
       .then((data) => setCategories(data.meals || []))
       .catch(() => {});
   }, []);
+
+  // Update instruction steps when recipe changes (for editing)
+  useEffect(() => {
+    if (recipe) {
+      // When editing, parse instructions or use empty array
+      const parsed = parseInstructions(recipe.strInstructions);
+      setInstructionSteps(parsed);
+    } else {
+      // Reset to single empty step when not editing
+      setInstructionSteps([""]);
+    }
+  }, [recipe]);
 
   const addInstructionStep = (index) => {
     const newSteps = [...instructionSteps];
@@ -84,7 +98,7 @@ function NewForm({ recipe, onSubmit, closeModal }) {
         {isEditing ? "Edit Recipe" : "Add New Recipe"}
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form key={recipe?.idMeal || "new"} onSubmit={handleSubmit}>
         <div className="form-control">
           <label htmlFor="name">Recipe Name</label>
           <input
