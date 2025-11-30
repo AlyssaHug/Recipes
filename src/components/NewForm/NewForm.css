@@ -134,7 +134,7 @@
 
 .step-input-wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     width: 100%;
 }
@@ -150,6 +150,10 @@
     color: var(--primary-color);
     transition: all 0.3s ease;
     box-sizing: border-box;
+    resize: none;
+    overflow: hidden;
+    min-height: 44px;
+    line-height: 1.5;
 }
 
 .step-input:focus {
@@ -181,6 +185,7 @@
     flex-shrink: 0;
     line-height: 1;
     padding: 0;
+    margin-top: 2px;
 }
 
 .add-step-button:hover {
@@ -212,6 +217,7 @@
     flex-shrink: 0;
     line-height: 1;
     padding: 0;
+    margin-top: 2px;
 }
 
 .remove-step-button:hover {

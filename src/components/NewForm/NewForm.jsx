@@ -58,6 +58,15 @@ function NewForm({ recipe, onSubmit, closeModal }) {
     }
   }, [recipe]);
 
+  // Auto-resize textareas when instruction steps change
+  useEffect(() => {
+    const textareas = document.querySelectorAll('.step-input');
+    textareas.forEach((textarea) => {
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    });
+  }, [instructionSteps]);
+
   const addInstructionStep = (index) => {
     const newSteps = [...instructionSteps];
     newSteps.splice(index + 1, 0, "");
@@ -163,12 +172,22 @@ function NewForm({ recipe, onSubmit, closeModal }) {
                   <div key={originalIndex} className="instruction-step">
                     <label className="step-label">Step {displayIndex + 1}</label>
                     <div className="step-input-wrapper">
-                      <input
-                        type="text"
+                      <textarea
                         value={step}
-                        onChange={(e) => updateInstructionStep(originalIndex, e.target.value)}
+                        onChange={(e) => {
+                          updateInstructionStep(originalIndex, e.target.value);
+                          // Auto-resize textarea
+                          e.target.style.height = 'auto';
+                          e.target.style.height = e.target.scrollHeight + 'px';
+                        }}
+                        onInput={(e) => {
+                          // Auto-resize on input
+                          e.target.style.height = 'auto';
+                          e.target.style.height = e.target.scrollHeight + 'px';
+                        }}
                         placeholder={`Step ${displayIndex + 1}...`}
                         className="step-input"
+                        rows={1}
                       />
                       {isLastStep ? (
                         <button
