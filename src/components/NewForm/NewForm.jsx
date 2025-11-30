@@ -3,10 +3,21 @@ import { nanoid } from "nanoid";
 import { useEffect, useState, useMemo } from "react";
 import "./NewForm.css";
 
+// Check if a step contains only a number (with optional "step" prefix)
+const isOnlyNumber = (step) => {
+  const trimmed = step.trim();
+  // Match patterns like "2", "step2", "Step 2", "step 2", etc. (case-insensitive)
+  const numberOnlyPattern = /^(step\s*)?\d+$/i;
+  return numberOnlyPattern.test(trimmed);
+};
+
 // Parse existing instructions into steps (split by newlines)
 const parseInstructions = (instructions) => {
   if (!instructions) return [""];
-  const steps = instructions.split(/\r?\n/).filter((step) => step.trim());
+  const steps = instructions
+    .split(/\r?\n/)
+    .map((step) => step.trim())
+    .filter((step) => step.length > 0 && !isOnlyNumber(step));
   return steps.length > 0 ? steps : [""];
 };
 
@@ -71,10 +82,10 @@ function NewForm({ recipe, onSubmit, closeModal }) {
     e.preventDefault();
     const data = new FormData(e.target);
 
-    // Join instruction steps with newlines, filtering out empty steps
+    // Join instruction steps with newlines, filtering out empty steps and number-only steps
     const instructions = instructionSteps
       .map((step) => step.trim())
-      .filter((step) => step.length > 0)
+      .filter((step) => step.length > 0 && !isOnlyNumber(step))
       .join("\n");
 
     const newRecipe = {
@@ -143,41 +154,49 @@ function NewForm({ recipe, onSubmit, closeModal }) {
         <div className="form-control">
           <label>Instructions</label>
           <div className="instructions-container">
-            {instructionSteps.map((step, index) => {
-              const isLastStep = index === instructionSteps.length - 1;
-              return (
-                <div key={index} className="instruction-step">
-                  <div className="step-input-wrapper">
-                    <input
-                      type="text"
-                      value={step}
-                      onChange={(e) => updateInstructionStep(index, e.target.value)}
-                      placeholder={`Step ${index + 1}...`}
-                      className="step-input"
-                    />
-                    {isLastStep ? (
-                      <button
-                        type="button"
-                        onClick={() => addInstructionStep(index)}
-                        className="add-step-button"
-                        aria-label="Add next step"
-                      >
-                        +
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => removeInstructionStep(index)}
-                        className="remove-step-button"
-                        aria-label="Remove step"
-                      >
-                        −
-                      </button>
-                    )}
+            {instructionSteps
+              .map((step, originalIndex) => ({ step, originalIndex }))
+              .filter(({ step }) => !isOnlyNumber(step))
+              .map(({ step, originalIndex }, displayIndex, filteredArray) => {
+                const isLastStep = displayIndex === filteredArray.length - 1;
+                return (
+                  <div key={originalIndex} className="instruction-step">
+                    <label className="step-label">Step {displayIndex + 1}</label>
+                    <div className="step-input-wrapper">
+                      <input
+                        type="text"
+                        value={step}
+                        onChange={(e) => updateInstructionStep(originalIndex, e.target.value)}
+                        placeholder={`Step ${displayIndex + 1}...`}
+                        className="step-input"
+                      />
+                      {isLastStep ? (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            // Add after the last step in the original array
+                            const lastIndex = instructionSteps.length - 1;
+                            addInstructionStep(lastIndex);
+                          }}
+                          className="add-step-button"
+                          aria-label="Add next step"
+                        >
+                          +
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => removeInstructionStep(originalIndex)}
+                          className="remove-step-button"
+                          aria-label="Remove step"
+                        >
+                          −
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
 
