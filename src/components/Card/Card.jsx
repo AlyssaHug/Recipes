@@ -59,7 +59,7 @@ function Recipe({
                     e.stopPropagation();
                     onShowDetails();
                 }}>
-                View Full Recipe
+                View Recipe Details
             </button>
         </div>
     );

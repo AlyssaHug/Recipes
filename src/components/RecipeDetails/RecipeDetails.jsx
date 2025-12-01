@@ -73,23 +73,6 @@ export default function RecipeDetails({
                             onError={(e) => (e.target.style.display = "none")}
                         />
                     )}
-                </div>
-                <div className='ingredient-info'>
-                    {ingredients.length > 0 ? (
-                        <>
-                            <h2>Ingredients</h2>
-                            <ul>
-                                {ingredients.map((item, index) => (
-                                    <li key={index}>
-                                        {item.measure ? `${item.measure} ` : ""}
-                                        {item.ingredient}
-                                    </li>
-                                ))}
-                            </ul>
-                        </>
-                    ) : (
-                        <p>No ingredients available for this recipe.</p>
-                    )}
                     <div className='button-group'>
                         {onToggleFavorite && (
                             <button
@@ -126,10 +109,27 @@ export default function RecipeDetails({
                                 className='view-recipe-btn'
                                 onClick={handleViewOriginalRecipe}
                             >
-                                View Full Recipe
+                                View Original Recipe
                             </button>
                         )}
                     </div>
+                </div>
+                <div className='ingredient-info'>
+                    {ingredients.length > 0 ? (
+                        <>
+                            <h2>Ingredients</h2>
+                            <ul>
+                                {ingredients.map((item, index) => (
+                                    <li key={index}>
+                                        {item.measure ? `${item.measure} ` : ""}
+                                        {item.ingredient}
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    ) : (
+                        <p>No ingredients available for this recipe.</p>
+                    )}
                 </div>
             </div>
             <div className='instructions'>
@@ -152,7 +152,6 @@ export default function RecipeDetails({
                 )}
             </div>
             {children}{" "}
-            {/* If you need to render additional content passed as children */}
         </div>
     );
 }

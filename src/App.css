@@ -53,24 +53,15 @@ main {
 }
 
 .no-favorites-message {
-    width: 100%;
     text-align: center;
     padding: 3em 2em;
     color: var(--primary-color);
-    font-size: 24px;
+    font-size: var(--font-size-large);
     font-weight: var(--font-weight-medium);
     font-family: var(--font-family);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     margin: 0 auto;
-}
-
-.no-favorites-message p {
-    margin: 0.5em 0;
-    line-height: 1.6;
     max-width: 600px;
+    line-height: 1.6;
 }
 
 /* Responsive styles for small screens */
