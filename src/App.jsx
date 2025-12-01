@@ -107,57 +107,67 @@ function App() {
                             />
                         </div>
                         {/* Content */}
-                        <div className='content'>
-                            <div className='edit-delete-wrapper'>
-                                <Add onAddRecipe={handleAddRecipe} />
-
-                                <EditButton
-                                    recipes={recipes}
-                                    setRecipes={setRecipes}
-                                    selectedRecipeId={selectedRecipeId}
-                                    setSelectedRecipeId={setSelectedRecipeId}
-                                />
-
-                                <DeleteButton
-                                    recipes={recipes}
-                                    setRecipes={setRecipes}
-                                    selectedRecipeId={selectedRecipeId}
-                                    setSelectedRecipeId={setSelectedRecipeId}
-                                />
+                        {showFavorites && favorites.size === 0 ? (
+                            <div className='content'>
+                                <p className='no-favorites-message'>
+                                    There is no favorite recipes yet. Add the ones you like to your collection!
+                                </p>
                             </div>
+                        ) : (
+                            <div className='content'>
+                                {!showFavorites && (
+                                    <div className='edit-delete-wrapper'>
+                                        <Add onAddRecipe={handleAddRecipe} />
 
-                            <div className='recipes'>
-                                {recipesToShow.map((recipe) => (
-                                    <Recipe
-                                        key={recipe.idMeal}
-                                        recipe={recipe}
-                                        selectedRecipeId={selectedRecipeId}
-                                        setSelectedRecipeId={
-                                            setSelectedRecipeId
-                                        }
-                                        isFavorite={favorites.has(
-                                            recipe.idMeal
-                                        )}
-                                        onToggleFavorite={() =>
-                                            toggleFavorite(recipe.idMeal)
-                                        }
-                                        isSelected={
-                                            selectedRecipeId === recipe.idMeal
-                                        }
-                                        onSelect={() =>
-                                            setSelectedRecipeId((prev) =>
-                                                prev === recipe.idMeal
-                                                    ? null
-                                                    : recipe.idMeal
-                                            )
-                                        }
-                                        onShowDetails={() =>
-                                            setDetailRecipe(recipe)
-                                        } // This opens full page
-                                    />
-                                ))}
+                                        <EditButton
+                                            recipes={recipes}
+                                            setRecipes={setRecipes}
+                                            selectedRecipeId={selectedRecipeId}
+                                            setSelectedRecipeId={setSelectedRecipeId}
+                                        />
+
+                                        <DeleteButton
+                                            recipes={recipes}
+                                            setRecipes={setRecipes}
+                                            selectedRecipeId={selectedRecipeId}
+                                            setSelectedRecipeId={setSelectedRecipeId}
+                                        />
+                                    </div>
+                                )}
+
+                                <div className='recipes'>
+                                    {recipesToShow.map((recipe) => (
+                                        <Recipe
+                                            key={recipe.idMeal}
+                                            recipe={recipe}
+                                            selectedRecipeId={selectedRecipeId}
+                                            setSelectedRecipeId={
+                                                setSelectedRecipeId
+                                            }
+                                            isFavorite={favorites.has(
+                                                recipe.idMeal
+                                            )}
+                                            onToggleFavorite={() =>
+                                                toggleFavorite(recipe.idMeal)
+                                            }
+                                            isSelected={
+                                                selectedRecipeId === recipe.idMeal
+                                            }
+                                            onSelect={() =>
+                                                setSelectedRecipeId((prev) =>
+                                                    prev === recipe.idMeal
+                                                        ? null
+                                                        : recipe.idMeal
+                                                )
+                                            }
+                                            onShowDetails={() =>
+                                                setDetailRecipe(recipe)
+                                            } // This opens full page
+                                        />
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </>
                 )}
             </main>
